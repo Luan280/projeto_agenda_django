@@ -131,3 +131,9 @@ MEDIA_URL = 'media/' # Rota padrão para arquivos de media
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+try:
+    from project.local_settings import *
+except ImportError:
+    ...
