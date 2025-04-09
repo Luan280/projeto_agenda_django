@@ -1,7 +1,7 @@
 from django.urls import path
 from contact import views
 
-app_name = "contact" # NAME_SPACE
+app_name = "contact"  # NAME_SPACE
 
 urlpatterns = [
     path('search/', views.search, name="search"),
