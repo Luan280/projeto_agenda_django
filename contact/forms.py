@@ -8,44 +8,35 @@ class ContactForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'classe-a',
-                'placeholder': "Escreva aqui"
+                'placeholder': "Escreva aqui",
             }
         ),
         help_text="Texto de ajuda para o seu usuário",
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # Atualizando o widget
-        # self.fields['first_name'].widget.attrs.update({
-        #     'class': 'classe-a',
-        #     'placeholder': "Escreva aqui"
-        # })
-
+    picture = forms.ImageField(
+        widget=forms.FileField(
+            attrs={
+                'accept': 'image/*',
+            }
+        )
+    )
     class Meta:
         model = models.Contact
         fields = (
             "first_name", "last_name", "phone",
             "email", "description", "category",
+            "picture",
 
         )
-        # Criando um novo widget para o campo
-        # widgets = {
-        #     "first_name": forms.TextInput(
-        #         attrs={
-        #             'class': 'classe-a',
-        #             'placeholder': "Escreva aqui"
-        #         }
-        #     ),
-        # }
+    
 
     def clean(self):
         cleaned_data = self.cleaned_data
         print
         first_name = cleaned_data.get('first_name')
         last_name = cleaned_data.get('last_name')
- 
+
         if first_name == last_name:
             msg = ValidationError(
                 "Primeiro nome não pode ser igual o segundo",
